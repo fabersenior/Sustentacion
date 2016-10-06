@@ -50,13 +50,18 @@ public class UbicaEstrellas {
         show(MD,fila,col);
         for(int i=0;i<fila;i++){
             for(int j=0;j<col;j++){
+
                if(i==0 && j==0){
                   res[i][j]=MD[i][j]+MD[i+1][j]+MD[i][1+j]+MD[i+1][1+j] ;                  
                }else if(i==0 && j!=0 && j<col-1){                   
                    res[i][j]=MD[i][j]+MD[i][j+1]+MD[i][j-1]+MD[i+1][j]+MD[i+1][1+j]+MD[i+1][j-1];
-               }else if(i==0 && j!=0 && j+1==col){//ultima posicion fila 1
+               }else if(i==0 && j!=0 && j+1==col){//ultima posicion fila 1 
                    res[i][j]=MD[i][j]+MD[i][j-1]+MD[i+1][j-1]+MD[i+1][j];
-               }else if(i+1==fila && j==0 ){
+               }else if(i>0 && j!=0 && j+1==col && i+1<fila){//ultima columna filas MEDIAS
+                res[i][j]=MD[i][j]+MD[i][j-1]+MD[i+1][j-1]+MD[i+1][j]+MD[i-1][j]+MD[i-1][j-1]; //AGREGAR ESTO
+               }else if(j==0 && i+1<fila){
+                    res[i][j]=MD[i][j]+MD[i][j+1]+MD[i-1][1+j]+MD[i-1][j] ;
+                }else if(i+1==fila && j==0 ){//ultima fila primera columna
                    res[i][j]=MD[i][j]+MD[i][j+1]+MD[i-1][1+j]+MD[i-1][j] ; 
                }else if(i+1==fila && j!=0 && j<col-1 ){//ultima fila
                    res[i][j]=MD[i][j]+MD[i][j+1]+MD[i][j-1]+MD[i-1][j]+MD[i-1][1+j]+MD[i-1][j-1];
@@ -94,12 +99,16 @@ public class UbicaEstrellas {
     
     static void show1(String m[][],int fila,int col){
         for(int i=0;i<fila;i++){
-            System.out.println(i+1); 
+            System.out.print(i+1); 
             for(int j=0;j<col;j++){
                 System.out.print(m[i][j]);                            
             }
             System.out.println(" "); 
         } 
+        System.out.print(" ");
+        for(int i=1;i<=col;i++){
+            System.out.print(i);
+        }
     }
     
 }
